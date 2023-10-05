@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_now_shop"
+            android:layout_width="86dp"
+            android:layout_height="86dp"/>
+        <LinearLayout
+            android:layout_marginStart="6dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20dp"
+                android:id="@+id/tv_shop_name"
+                android:textColor="@color/black"
+                android:text="Quán Béo - Bánh cuốn, Bún chả"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+           <TableRow
+               android:layout_marginTop="6dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:src="@drawable/ic_star"
+                   android:layout_height="wrap_content"/>
+               <TextView
+                   android:layout_marginStart="4dp"
+                   android:layout_width="wrap_content"
+                   android:textColor="@color/black"
+                   android:text="4.8"
+                   android:textSize="16dp"
+                   android:layout_height="wrap_content"/>
+               <TextView
+                   android:layout_marginStart="6dp"
+                   android:layout_width="wrap_content"
+                   android:textColor="@color/black"
+                   android:text="|"
+                   android:textSize="20dp"
+                   android:layout_height="wrap_content"/>
+               <TextView
+                   android:id="@+id/tv_phone_shop"
+                   android:layout_marginStart="6dp"
+                   android:layout_width="wrap_content"
+                   android:textColor="@color/black"
+                   android:text="Phone"
+                   android:textSize="16dp"
+                   android:layout_height="wrap_content"/>
+           </TableRow>
+            <TextView
+                android:id="@+id/tv_address_shop"
+                android:layout_marginTop="4dp"
+                android:text="Quán ăn anh Béo xin được phục vụ quý khách"
+                android:layout_width="wrap_content"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

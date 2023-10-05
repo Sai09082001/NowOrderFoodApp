@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:gravity="center_horizontal">
+        
+        <TextView
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16dp"
+            android:id="@+id/tv_product_name"
+            android:textColor="@color/black"
+            android:text="Tạo tài khoản"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_profile"
+            android:layout_marginTop="16dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/gray_blue" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_name"
+            android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Tên của bạn" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_age"
+             android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Tuổi" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_username"
+             android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Tên đăng nhập" />
+
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_password"
+             android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Mật khẩu" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_phone"
+             android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Số điện thoại" />
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/edt_create_home_address"
+             android:layout_marginTop="16dp"
+            android:inputType="textEmailAddress"
+            android:hint="Địa chỉ của bạn" />
+        <RadioGroup
+            android:id="@+id/radio_group"
+             android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/role_user"
+                android:text="USER"
+                android:layout_marginEnd="20dp"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/role_shipper"
+                android:text="SHIPPER"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </RadioGroup>
+        <TextView
+            android:id="@+id/bt_sign_up"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:paddingVertical="10dp"
+            android:background="@drawable/custom_button_login"
+            android:text="Đăng kí"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>
