@@ -16,6 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NowOrderFoodApp">
+        <activity android:name=".view.act.CustomerServiceActivity"/>
+        <activity android:name=".view.act.PromotionActivity"/>
         <activity android:name=".view.act.ShopDetailActivity"/>
         <activity android:name=".view.act.MapActivity"/>
         <activity android:name=".view.act.ShipActivity"/>
@@ -26,6 +28,7 @@
         <activity android:name=".view.act.EditUserActivity"/>
         <activity
             android:name=".view.act.MainActivity"
+            android:theme="@style/Theme.NowOrderFoodApp"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

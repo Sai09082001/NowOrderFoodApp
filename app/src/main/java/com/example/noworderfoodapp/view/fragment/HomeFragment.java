@@ -38,8 +38,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, LoginViewMod
                     case R.id.action_order:
                         binding.vpHome.setCurrentItem(1);
                         break;
-                    case R.id.action_profile:
+                    case R.id.action_favorite:
                         binding.vpHome.setCurrentItem(2);
+                        break;
+                    case R.id.action_profile:
+                        binding.vpHome.setCurrentItem(3);
                         break;
                 }
                 return true;
@@ -67,6 +70,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, LoginViewMod
                         binding.bottomNaviHome.getMenu().findItem(R.id.action_order).setChecked(true);
                         break;
                     case 2 :
+                        binding.bottomNaviHome.getMenu().findItem(R.id.action_favorite).setChecked(true);
+                        break;
+                    case 3 :
                         binding.bottomNaviHome.getMenu().findItem(R.id.action_profile).setChecked(true);
                         break;
                 }

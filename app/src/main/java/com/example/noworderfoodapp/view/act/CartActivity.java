@@ -2,7 +2,7 @@ package com.example.noworderfoodapp.view.act;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +13,9 @@ import com.example.noworderfoodapp.databinding.ActivityCartBinding;
 import com.example.noworderfoodapp.entity.OrderItems;
 import com.example.noworderfoodapp.entity.Orders;
 import com.example.noworderfoodapp.entity.Products;
+import com.example.noworderfoodapp.entity.Promotion;
 import com.example.noworderfoodapp.entity.Shop;
 import com.example.noworderfoodapp.view.adapter.OrderItemsAdapter;
-import com.example.noworderfoodapp.view.adapter.ShopDetailAdapter;
 import com.example.noworderfoodapp.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
@@ -24,9 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewModel>{
+    public static final int REQUEST_ACTION_PROMOTION = 111;
     private ArrayList<OrderItems> orderItems;
     private Orders orders;
     private Shop shop;
+    private Promotion promotion;
+
     public HashMap<Integer, Integer> getProductMap() {
         return productMap;
     }
@@ -96,11 +99,22 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
         binding.tvOrderConfirm.setOnClickListener(view -> {
 //            List<String> states = new ArrayList<>();
 //            states.add("Delivery");
-            orders = new Orders(orderItems,sumMoney,binding.edtComment.getText().toString(),
+            orders = new Orders(orderItems,Double.parseDouble(binding.tvSumMoney.getText().toString()),binding.edtComment.getText().toString(),
                                 App.getInstance().getUser(),shop.getName(),"Delivery",shop.getAddress());
             viewModel.postOrdersData(orders);
+            if (promotion != null) {
+                promotion.setStatus("used");
+                viewModel.updatePromotion(promotion);
+            }
             App.getInstance().setOrder(false);
             finish();
+        });
+        binding.ivUsePromotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, PromotionActivity.class);
+                startActivityForResult(intent, REQUEST_ACTION_PROMOTION);
+            }
         });
     }
 
@@ -129,6 +143,45 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
     @Override
     public void callBack(String key, Object data) {
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_ACTION_PROMOTION) {
+            if (resultCode == RESULT_OK) {
+                promotion = (Promotion) data.getSerializableExtra("key_promotion");
+                if (!promotion.getValue().isEmpty()) {
+                    binding.frUsePromotion.setVisibility(View.VISIBLE);
+                    calculateTotalPromotion(promotion.getValue());
+                }
+            } else {
+                // Xử lý khi action không thành công (nếu cần)
+            }
+        }
+    }
+
+    private void calculateTotalPromotion(String result){
+        if (containsPercent(result)) {
+            result = result.replace("%", "");
+            double percentValue = Double.parseDouble(result);
+            double totalData = calculateTotalPrice()+15000;
+            double dataPercent = totalData * (percentValue/100);
+            String resultString = String.valueOf(dataPercent);
+            binding.tvValuePromotion.setText("-"+resultString);
+            double totalResult = totalData - dataPercent;
+            binding.tvSumMoney.setText(totalResult+"");
+            binding.tvOrderConfirm.setText("Đặt đơn : "+totalResult+"đ");
+        } else {
+            double promotion = Double.parseDouble(result);
+            double data = calculateTotalPrice()+15000+promotion;
+            binding.tvValuePromotion.setText(result);
+            binding.tvSumMoney.setText(data + "");
+            binding.tvOrderConfirm.setText("Đặt đơn : "+data+"đ");
+        }
+    }
+    private boolean containsPercent(String inputString) {
+        return inputString != null && inputString.contains("%");
     }
 
 }

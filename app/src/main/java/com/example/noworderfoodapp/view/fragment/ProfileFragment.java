@@ -15,8 +15,10 @@ import com.example.noworderfoodapp.api.ApiService;
 import com.example.noworderfoodapp.databinding.FragmentOrderBinding;
 import com.example.noworderfoodapp.databinding.FragmentProfileBinding;
 import com.example.noworderfoodapp.databinding.FragmentSplashBinding;
+import com.example.noworderfoodapp.view.act.CustomerServiceActivity;
 import com.example.noworderfoodapp.view.act.EditUserActivity;
 import com.example.noworderfoodapp.view.act.MainActivity;
+import com.example.noworderfoodapp.view.act.PromotionActivity;
 import com.example.noworderfoodapp.viewmodel.ProfileViewModel;
 import com.example.noworderfoodapp.viewmodel.SplashViewModel;
 
@@ -48,6 +50,20 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
                startActivity(intent);
            }
        });
+        binding.frPromotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PromotionActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.frCustomerService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CustomerServiceActivity.class);
+                startActivity(intent);
+            }
+        });
         binding.btLogout.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {

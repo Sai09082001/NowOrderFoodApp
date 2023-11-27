@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.noworderfoodapp.view.fragment.FavoriteShopFragment;
 import com.example.noworderfoodapp.view.fragment.OrderFragment;
 import com.example.noworderfoodapp.view.fragment.ProfileFragment;
 import com.example.noworderfoodapp.view.fragment.ShopFragment;
@@ -19,7 +20,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
     // Returns total number of pages
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     // Returns the fragment to display for that page
@@ -31,6 +32,8 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
             case 1 :
                 return new OrderFragment();
             case 2 :
+                return new FavoriteShopFragment();
+            case 3 :
                 return new ProfileFragment();
             default:
                 return new ShopFragment();

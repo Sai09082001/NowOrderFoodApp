@@ -17,12 +17,14 @@ import com.example.noworderfoodapp.viewmodel.LoginViewModel;
 import com.example.noworderfoodapp.viewmodel.SignUpViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpViewModel> {
     public static final String KEY_BACK_LOGIN_FRAGMENT = "KEY_BACK_LOGIN_FRAGMENT";
     private String selectedText;
+    private List<String> roles;
 
     @Override
     protected Class<SignUpViewModel> getViewModelClass() {
@@ -36,6 +38,7 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
 
     @Override
     protected void initViews() {
+        roles = new ArrayList<>();
 //        int selectedRadioButtonId = binding.radioGroup.getCheckedRadioButtonId();
 //
 //        if (selectedRadioButtonId != -1) {
@@ -61,7 +64,6 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
 //        }else if (binding.roleShipper.isChecked()) {
 //
 //        }
-        List<String> roles = new ArrayList<>();
         roles.add(selectedText);
         binding.btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +71,7 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
                 mViewModel.loginUsernameAndPassword(new User(binding.edtCreateName.getText().toString(),
                         Integer.parseInt(binding.edtCreateAge.getText().toString()),binding.edtCreateUsername.getText().toString()
                 ,binding.edtCreatePassword.getText().toString(),binding.edtCreatePhone.getText().toString(),
-                        binding.edtCreateHomeAddress.getText().toString(),roles));
+                        binding.edtCreateHomeAddress.getText().toString(), new ArrayList<>(Arrays.asList(selectedText))));
                 callBack.callBack(KEY_BACK_LOGIN_FRAGMENT,null);
             }
         });

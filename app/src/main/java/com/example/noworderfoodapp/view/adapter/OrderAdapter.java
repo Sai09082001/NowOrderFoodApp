@@ -68,7 +68,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             holder.tvStateOrder.setText("Đang giao hàng");
         }else if (data.getStates().equals("Done")) {
             holder.tvStateOrder.setText("Hoàn thành");
-        }else {
+        }else if (data.getStates().equals("Cancel")) {
+            holder.tvStateOrder.setText("Đã hủy đơn");
+        } else {
             holder.tvStateOrder.setText("Đang xác nhận");
         }
         holder.tvShopAddress.setText(data.getAddress());

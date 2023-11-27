@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/ln_promotion"
+        android:gravity="center|start"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:id="@+id/iv_promotion"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_promotion_percent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+        <FrameLayout
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginTop="6dp"
+                android:id="@+id/tv_name_promotion"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:text="Giảm 20% cho người dùng mới"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:background="@drawable/custom_bt_orders"
+                android:layout_gravity="bottom"
+                android:id="@+id/tv_use_promotion"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:paddingVertical="4dp"
+                android:text="Sử dụng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

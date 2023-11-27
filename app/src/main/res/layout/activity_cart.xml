@@ -168,6 +168,54 @@
                        android:textSize="16dp" />
 
                </FrameLayout>
+
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="8dp">
+
+                   <TextView
+                       android:id="@+id/tv_use_promotion"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="10dp"
+                       android:background="@color/white"
+                       android:text="Mã khuyến mại"
+                       android:textSize="16dp" />
+
+                   <ImageView
+                       android:id="@+id/iv_use_promotion"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="end"
+                       android:layout_marginEnd="10dp"
+                       android:src="@drawable/ic_promotion_reduce" />
+               </FrameLayout>
+               <FrameLayout
+                   android:visibility="gone"
+                   android:id="@+id/fr_use_promotion"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="8dp">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="10dp"
+                       android:background="@color/white"
+                       android:text="Giảm khuyến mại : "
+                       android:textSize="16dp" />
+                   <TextView
+                       android:layout_gravity="end"
+                       android:id="@+id/tv_value_promotion"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="10dp"
+                       android:background="@color/white"
+                       android:text="-15000"
+                       android:textSize="16dp" />
+
+               </FrameLayout>
                <FrameLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"

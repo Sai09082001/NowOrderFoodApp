@@ -61,7 +61,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </FrameLayout>
-
+        <FrameLayout
+            android:id="@+id/fr_promotion"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:text="Khuyến mãi now food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_gravity="end"
+                android:src="@drawable/ic_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fr_customer_service"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:text="Chăm sóc khách hàng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_gravity="end"
+                android:src="@drawable/ic_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
         <FrameLayout
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"

@@ -52,10 +52,14 @@ public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.UserHo
         User data = listUser.get(position); // lấy vị trí gán data tương ứng cho từng data
         holder.tvUserName.setText(data.getName());
         holder.tvUserAddress.setText(data.getHomeAddress());
-      //  holder.tvUserPhone.setText(data.getPhonenumber());
+        holder.tvUserPhone.setText(data.getPhonenumber());
         holder.user = data;
-        Glide.with(mContext).load(""+ ApiClient.BASE_URL+"/user/download?filename="+
-                App.getInstance().getUser().getAvatarUrl()).into(holder.ivUser);
+        if ( App.getInstance().getUser().getAvatarUrl() == null){
+            holder.ivUser.setImageResource(R.drawable.ic_user_receiver);
+        } else {
+            Glide.with(mContext).load(""+ApiClient.BASE_URL+"/user/download?filename="+
+                    App.getInstance().getUser().getAvatarUrl()).into(holder.ivUser);
+        }
     }
 
     @Override
@@ -82,8 +86,8 @@ public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.UserHo
             super(itemView);
             tvUserName = itemView.findViewById(R.id.tv_user_name);
             tvUserAddress= itemView.findViewById(R.id.tv_address_user);
-            tvUserPhone= itemView.findViewById(R.id.tv_user_phone);
-            ivUser = itemView.findViewById(R.id.profile_image);
+            tvUserPhone= itemView.findViewById(R.id.tv_phone_shop);
+            ivUser = itemView.findViewById(R.id.iv_user_service);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

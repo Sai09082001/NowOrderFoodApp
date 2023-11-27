@@ -1,6 +1,7 @@
 package com.example.noworderfoodapp.api;
 
 import com.example.noworderfoodapp.entity.Orders;
+import com.example.noworderfoodapp.entity.Promotion;
 import com.example.noworderfoodapp.entity.ResponseDTO;
 import com.example.noworderfoodapp.entity.Shop;
 import com.example.noworderfoodapp.entity.User;
@@ -38,9 +39,12 @@ public interface ApiService {
 
     @GET("/shop/list")
     Call<ResponseDTO<List<Shop>>> getListShop();
-
+    @GET("/promotion/list")
+    Call<ResponseDTO<List<Promotion>>> getListPromotion();
     @GET("/orders/list")
     Call<ResponseDTO<List<Orders>>> getListOrders();
+    @POST("/orders/updateuser")
+    Call<ResponseDTO<Void>> orderUpdateUser(@Body Orders orders);
 
     @GET("/orders/ship")
     Call<ResponseDTO<List<Orders>>> searchOrderByShipper(@Query("id") int id);
@@ -57,8 +61,12 @@ public interface ApiService {
                                        @Field("name") String name,
                                        @Field("phonenumber") String phonenumber,
                                        @Field("homeAddress") String homeAddress);
+    @POST("/promotion/edit")
+    Call<ResponseDTO<Void>> updatePromotion(@Body Promotion promotion);
+
     @POST("/orders/update")
     Call<ResponseDTO<Void>> orderUpdate(@Body Orders orders);
+
 
     @FormUrlEncoded
     @POST("/user/new")

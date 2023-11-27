@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,18 +67,27 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopHolder> {
 
     public interface OnItemClick {
         void onItemClick(Shop shop);
+        void onFavoriteShopClick(Shop shop);
     }
 
     public class ShopHolder extends RecyclerView.ViewHolder {
         private TextView tvShopName;
         private TextView tvAddress;
         private TextView tvPhone;
+        private ImageView ivFavoriteShop;
         private Shop shop;
         public ShopHolder(@NonNull View itemView) {
             super(itemView);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
             tvAddress= itemView.findViewById(R.id.tv_address_shop);
             tvPhone= itemView.findViewById(R.id.tv_phone_shop);
+            ivFavoriteShop= itemView.findViewById(R.id.iv_favorite_shop);
+            ivFavoriteShop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.onFavoriteShopClick(shop);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

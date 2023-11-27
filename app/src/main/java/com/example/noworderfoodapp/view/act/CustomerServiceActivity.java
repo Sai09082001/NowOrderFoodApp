@@ -1,30 +1,23 @@
-package com.example.noworderfoodapp.view.fragment;
+package com.example.noworderfoodapp.view.act;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
-
+import android.widget.Toast;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.noworderfoodapp.R;
-import com.example.noworderfoodapp.databinding.FragmentShopBinding;
-import com.example.noworderfoodapp.databinding.FragmentUserBinding;
-import com.example.noworderfoodapp.entity.Category;
-import com.example.noworderfoodapp.entity.Shop;
+import com.example.noworderfoodapp.databinding.ActivityCustomerServiceBinding;
 import com.example.noworderfoodapp.entity.User;
-import com.example.noworderfoodapp.view.act.ShopDetailActivity;
 import com.example.noworderfoodapp.view.adapter.ListUserAdapter;
-import com.example.noworderfoodapp.view.adapter.ShopAdapter;
-import com.example.noworderfoodapp.viewmodel.ShopViewModel;
 import com.example.noworderfoodapp.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserFragment extends BaseFragment<FragmentUserBinding, UserViewModel> {
-    public static final String KEY_SHOW_SHOP_DETAIL = "KEY_SHOW_SHOP_DETAIL";
+public class CustomerServiceActivity extends BaseActivity<ActivityCustomerServiceBinding, UserViewModel> implements ListUserAdapter.OnItemClick {
     private ListUserAdapter usersAdapter;
     private List<User> listUser;
     @Override
@@ -34,14 +27,14 @@ public class UserFragment extends BaseFragment<FragmentUserBinding, UserViewMode
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_user;
+        return R.layout.activity_customer_service;
     }
 
     @Override
     protected void initViews() {
         listUser = new ArrayList<>();
-        mViewModel.getListUserServer();
-        mViewModel.getUserMutableLiveData().observe(this, new Observer<List<User>>() {
+        viewModel.getListUserServer();
+        viewModel.getUserMutableLiveData().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
                 listUser.clear();
@@ -51,26 +44,16 @@ public class UserFragment extends BaseFragment<FragmentUserBinding, UserViewMode
             }
         });
         //  setCallBack((OnActionCallBack) getActivity());
-        usersAdapter = new ListUserAdapter(listUser,getContext());
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
+        usersAdapter = new ListUserAdapter(listUser,this);
+        LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
         binding.rcvUsers.setLayoutManager(manager);
         binding.rcvUsers.setAdapter(usersAdapter);
-       // usersAdapter.setOnItemClick(this);
+        usersAdapter.setOnItemClick(this);
     }
-
-//    @Override
-//    public void onItemClick(Shop shop) {
-//        Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
-//        intent.putExtra("category",(ArrayList<Category>) shop.getCategories());
-//        intent.putExtra("shop", shop);
-//        getActivity().startActivity(intent);
-//    }
-
     @Override
     public void onResume() {
         super.onResume();
-        //
-        List<User> usersList = mViewModel.getUserMutableLiveData().getValue();
+        List<User> usersList = viewModel.getUserMutableLiveData().getValue();
         if (usersList != null) {
             usersAdapter.setListUser(usersList);
         }
@@ -78,4 +61,22 @@ public class UserFragment extends BaseFragment<FragmentUserBinding, UserViewMode
         binding.lnUserList.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void callBack(String key, Object data) {
+
+    }
+
+    @Override
+    public void onItemClick(User user) {
+        String phoneNumber = user.getPhonenumber();
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Không tìm thấy ứng dụng điện thoại.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

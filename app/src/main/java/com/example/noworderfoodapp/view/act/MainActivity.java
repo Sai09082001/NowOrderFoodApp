@@ -4,10 +4,8 @@ import com.example.noworderfoodapp.R;
 import com.example.noworderfoodapp.databinding.ActivityMainBinding;
 import com.example.noworderfoodapp.view.fragment.HomeFragment;
 import com.example.noworderfoodapp.view.fragment.LoginFragment;
-import com.example.noworderfoodapp.view.fragment.ProfileFragment;
 import com.example.noworderfoodapp.view.fragment.SignUpFragment;
 import com.example.noworderfoodapp.view.fragment.SplashFragment;
-import com.example.noworderfoodapp.view.fragment.UserFragment;
 import com.example.noworderfoodapp.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {

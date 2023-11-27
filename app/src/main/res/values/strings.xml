@@ -4,5 +4,8 @@
     <string name="txt_ho_guom">Shop A Béo</string>
     <string name="txt_ho_guom_address">Hàng Trống,Hoàn Kiếm,Hà Nội, Việt Nam</string>
     <string name="txt_ho_guom_content">Shop phục vụ những món ăn truyền thống Việt Nam pha chút phong cách hiện đại từ Châu Âu và Nhật Bản.</string>
-
+    <string-array name="order_array">
+        <item>Tất cả</item>
+        <item>Ngày</item>
+    </string-array>
 </resources>
