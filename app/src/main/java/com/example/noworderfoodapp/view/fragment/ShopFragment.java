@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +24,10 @@ import com.example.noworderfoodapp.databinding.FragmentShopBinding;
 import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.FavoriteShop;
 import com.example.noworderfoodapp.entity.Orders;
+import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Shop;
 import com.example.noworderfoodapp.view.act.ShopDetailActivity;
+import com.example.noworderfoodapp.view.adapter.ProductAdapter;
 import com.example.noworderfoodapp.view.adapter.ShopAdapter;
 import com.example.noworderfoodapp.viewmodel.ShopViewModel;
 
@@ -32,10 +35,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewModel> implements ShopAdapter.OnItemClick {
+public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewModel> implements ShopAdapter.OnItemClick ,ProductAdapter.OnItemClick{
     public static final String KEY_SHOW_SHOP_DETAIL = "KEY_SHOW_SHOP_DETAIL";
     private ShopAdapter shopAdapter;
     private List<Shop> listShop;
+
+    private ProductAdapter productAdapter;
+    private List<Products> listProduct;
     @Override
     protected Class<ShopViewModel> getViewModelClass() {
         return ShopViewModel.class;
@@ -49,7 +55,9 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
     @Override
     protected void initViews() {
         listShop = new ArrayList<>();
+        listProduct = new ArrayList<>();
         mViewModel.getListShopServer();
+        mViewModel.getListProducts();
         mViewModel.getShopMutableLiveData().observe(this, new Observer<List<Shop>>() {
             @Override
             public void onChanged(List<Shop> shops) {
@@ -59,12 +67,26 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 Log.i("KMFG", "initViews: "+listShop.toString());
             }
         });
+        mViewModel.getProductsMutableLiveData().observe(this, new Observer<List<Products>>() {
+            @Override
+            public void onChanged(List<Products> products) {
+                listProduct.clear();
+                listProduct.addAll(products);
+                productAdapter.notifyDataSetChanged();
+            }
+        });
       //  setCallBack((OnActionCallBack) getActivity());
         shopAdapter = new ShopAdapter(listShop,getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
         binding.rcvShop.setLayoutManager(manager);
         binding.rcvShop.setAdapter(shopAdapter);
         shopAdapter.setOnItemClick(this);
+
+        productAdapter = new ProductAdapter(listProduct,getContext());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        binding.rcvWatchProduct.setLayoutManager(gridLayoutManager);
+        binding.rcvWatchProduct.setAdapter(productAdapter);
+        productAdapter.setOnItemClick(this);
     }
 
     @Override
@@ -118,4 +140,9 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
         binding.lnShopList.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onItemClick(Products products) {
+        Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
+        getActivity().startActivity(intent);
+    }
 }

@@ -32,13 +32,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, LoginViewMod
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.action_shop:
+                    case R.id.action_home:
                         binding.vpHome.setCurrentItem(0);
                         break;
-                    case R.id.action_order:
+                    case R.id.action_shop:
                         binding.vpHome.setCurrentItem(1);
                         break;
-                    case R.id.action_favorite:
+                    case R.id.action_order:
                         binding.vpHome.setCurrentItem(2);
                         break;
                     case R.id.action_profile:
@@ -64,13 +64,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, LoginViewMod
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0 :
-                        binding.bottomNaviHome.getMenu().findItem(R.id.action_shop).setChecked(true);
+                        binding.bottomNaviHome.getMenu().findItem(R.id.action_home).setChecked(true);
                         break;
                     case 1 :
-                        binding.bottomNaviHome.getMenu().findItem(R.id.action_order).setChecked(true);
+                        binding.bottomNaviHome.getMenu().findItem(R.id.action_shop).setChecked(true);
                         break;
                     case 2 :
-                        binding.bottomNaviHome.getMenu().findItem(R.id.action_favorite).setChecked(true);
+                        binding.bottomNaviHome.getMenu().findItem(R.id.action_order).setChecked(true);
                         break;
                     case 3 :
                         binding.bottomNaviHome.getMenu().findItem(R.id.action_profile).setChecked(true);

@@ -54,44 +54,44 @@ public class OrderFragment extends BaseFragment<FragmentOrderBinding, OrderViewM
         binding.rcvOrder.setLayoutManager(manager);
         binding.rcvOrder.setAdapter(orderAdapter);
         orderAdapter.setOnItemClick(this);
-        ArrayAdapter<CharSequence> adapterHk = ArrayAdapter.createFromResource(getContext(),
-                R.array.order_array, android.R.layout.simple_spinner_item);
-        adapterHk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spFilterOrder.setAdapter(adapterHk);
-        binding.spFilterOrder.setOnItemSelectedListener(new InitDataEvent());
+//        ArrayAdapter<CharSequence> adapterHk = ArrayAdapter.createFromResource(getContext(),
+//                R.array.order_array, android.R.layout.simple_spinner_item);
+//        adapterHk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.spFilterOrder.setAdapter(adapterHk);
+//        binding.spFilterOrder.setOnItemSelectedListener(new InitDataEvent());
     }
-    private class InitDataEvent implements AdapterView.OnItemSelectedListener {
-        //Khi có chọn lựa thì vào hàm này
-        public void onItemSelected(AdapterView<?> arg0,
-                                   View arg1,
-                                   int arg2,
-                                   long arg3) {
-            //arg2 là phần tử được chọn trong data source
-            Log.i("KMFG", "onItemSelected: ok");
-            initDataOrderTime(arg2);
-        }
-        public void onNothingSelected(AdapterView<?> arg0) {
-
-        }
-    }
-    private void initDataOrderTime(int arg) {
-        if (arg==1) {
-            listOrder.clear();
-            listOrder.addAll(mViewModel.filterOrderByDate());
-            orderAdapter.notifyDataSetChanged();
-        } else if (arg ==0 ) {
-            mViewModel.getOrderByUser(App.getInstance().getUser().getId());
-            mViewModel.getOrdersMutableLiveData().observe(this, new Observer<List<Orders>>() {
-                @Override
-                public void onChanged(List<Orders> shops) {
-                    listOrder.clear();
-                    listOrder.addAll(shops);
-                    orderAdapter.notifyDataSetChanged();
-                }
-            });
-        }
-
-    }
+//    private class InitDataEvent implements AdapterView.OnItemSelectedListener {
+//        //Khi có chọn lựa thì vào hàm này
+//        public void onItemSelected(AdapterView<?> arg0,
+//                                   View arg1,
+//                                   int arg2,
+//                                   long arg3) {
+//            //arg2 là phần tử được chọn trong data source
+//            Log.i("KMFG", "onItemSelected: ok");
+//            initDataOrderTime(arg2);
+//        }
+//        public void onNothingSelected(AdapterView<?> arg0) {
+//
+//        }
+//    }
+//    private void initDataOrderTime(int arg) {
+//        if (arg==1) {
+//            listOrder.clear();
+//            listOrder.addAll(mViewModel.filterOrderByDate());
+//            orderAdapter.notifyDataSetChanged();
+//        } else if (arg ==0 ) {
+//            mViewModel.getOrderByUser(App.getInstance().getUser().getId());
+//            mViewModel.getOrdersMutableLiveData().observe(this, new Observer<List<Orders>>() {
+//                @Override
+//                public void onChanged(List<Orders> shops) {
+//                    listOrder.clear();
+//                    listOrder.addAll(shops);
+//                    orderAdapter.notifyDataSetChanged();
+//                }
+//            });
+//        }
+//
+//    }
 
     @Override
     public void onItemClick(Orders orders) {

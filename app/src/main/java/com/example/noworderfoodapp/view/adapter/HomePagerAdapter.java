@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.noworderfoodapp.view.fragment.FavoriteShopFragment;
+import com.example.noworderfoodapp.view.fragment.HomeShoeFragment;
 import com.example.noworderfoodapp.view.fragment.OrderFragment;
 import com.example.noworderfoodapp.view.fragment.ProfileFragment;
 import com.example.noworderfoodapp.view.fragment.ShopFragment;
@@ -28,11 +29,11 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0 :
-                return new ShopFragment();
+                return new HomeShoeFragment();
             case 1 :
-                return new OrderFragment();
+                return new ShopFragment();
             case 2 :
-                return new FavoriteShopFragment();
+                return new OrderFragment();
             case 3 :
                 return new ProfileFragment();
             default:

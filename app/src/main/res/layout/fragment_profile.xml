@@ -70,7 +70,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:textSize="18dp"
                 android:textColor="@color/black"
-                android:text="Khuyến mãi now food"
+                android:text="Khuyến mãi watch shop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView

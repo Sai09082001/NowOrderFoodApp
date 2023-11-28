@@ -1,6 +1,8 @@
 package com.example.noworderfoodapp.api;
 
+import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.Orders;
+import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Promotion;
 import com.example.noworderfoodapp.entity.ResponseDTO;
 import com.example.noworderfoodapp.entity.Shop;
@@ -43,6 +45,10 @@ public interface ApiService {
     Call<ResponseDTO<List<Promotion>>> getListPromotion();
     @GET("/orders/list")
     Call<ResponseDTO<List<Orders>>> getListOrders();
+    @GET("/categories/list")
+    Call<ResponseDTO<List<Category>>> getListCategory();
+    @GET("/products/list")
+    Call<ResponseDTO<List<Products>>> getListProducts();
     @POST("/orders/updateuser")
     Call<ResponseDTO<Void>> orderUpdateUser(@Body Orders orders);
 

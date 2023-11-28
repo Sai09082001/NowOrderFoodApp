@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_shop"
+    <item android:id="@+id/action_home"
         android:icon="@drawable/ic_store"
-        android:title="Shop" />
+        android:title="Home" />
+    <item android:id="@+id/action_shop"
+        android:icon="@drawable/ic_shop_menu"
+        android:title="Shopping" />
     <item android:id="@+id/action_order"
         android:icon="@drawable/ic_shopping"
         android:title="Đơn hàng" />
-    <item android:id="@+id/action_favorite"
-        android:icon="@drawable/ic_favorite_shop"
-        android:title="Yêu thích" />
+<!--    <item android:id="@+id/action_favorite"-->
+<!--        android:icon="@drawable/ic_favorite_shop"-->
+<!--        android:title="Yêu thích" />-->
     <item android:id="@+id/action_profile"
         android:icon="@drawable/ic_profile"
         android:title="Tôi" />
