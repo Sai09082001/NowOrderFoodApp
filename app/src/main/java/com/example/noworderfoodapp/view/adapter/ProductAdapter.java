@@ -25,6 +25,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     private final Context mContext;
     private OnItemClick callBack;
 
+    public void setProductsList(List<Products> productsList) {
+        this.productsList = productsList;
+        notifyDataSetChanged();
+    }
+
     public List<Products> getListProducts() {
         return productsList;
     }

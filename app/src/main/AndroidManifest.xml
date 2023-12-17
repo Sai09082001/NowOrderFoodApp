@@ -26,6 +26,7 @@
         <activity android:name=".view.act.OrderDetailActivity"/>
         <activity android:name=".view.act.CartActivity"/>
         <activity android:name=".view.act.EditUserActivity"/>
+        <activity android:name=".view.act.ProductDetailActivity"/>
         <activity
             android:name=".view.act.MainActivity"
             android:theme="@style/Theme.NowOrderFoodApp"
