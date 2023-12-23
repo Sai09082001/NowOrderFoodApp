@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -26,6 +24,7 @@ import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.FavoriteShop;
 import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Shop;
+import com.example.noworderfoodapp.view.act.CartUserActivity;
 import com.example.noworderfoodapp.view.act.ProductDetailActivity;
 import com.example.noworderfoodapp.view.act.ShopDetailActivity;
 import com.example.noworderfoodapp.view.adapter.CategoryAdapter;
@@ -83,6 +82,13 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 productAdapter.notifyDataSetChanged();
             }
         });
+        binding.topBarAction.ivCartUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CartUserActivity.class);
+                startActivity(intent);
+            }
+        });
       //  setCallBack((OnActionCallBack) getActivity());
         categoryAdapter = new CategoryAdapter(listCategory,getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false);
@@ -103,14 +109,6 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 productAdapter.setProductsList(listProduct);
             }
         });
-        binding.tbFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FilterOptionDialog filterOptionDialog = new FilterOptionDialog();
-                filterOptionDialog.show(getActivity().getSupportFragmentManager(), FilterOptionDialog.TAG);
-                filterOptionDialog.setOnItemClick(ShopFragment.this);
-            }
-        });
         binding.imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,46 +119,15 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 filterProducts(searchQuery);
             }
         });
-
-        binding.edSearch.addTextChangedListener(new TextWatcher() {
+        binding.tbFilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Not used in this case
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Not used in this case
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // Filter products based on the search query as the user types
-                filterProducts(editable.toString());
+            public void onClick(View v) {
+                FilterOptionDialog filterOptionDialog = new FilterOptionDialog();
+                filterOptionDialog.show(getActivity().getSupportFragmentManager(), FilterOptionDialog.TAG);
+                filterOptionDialog.setOnItemClick(ShopFragment.this);
             }
         });
-
-
-
-
-
     }
-
-    private void filterProducts(String query) {
-        List<Products> filteredList = new ArrayList<>();
-
-        for (Products product : listAllProduct) {
-            if (product.getName().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(product);
-            }
-        }
-
-        // Update the product list in the adapter
-        listProduct.clear();
-        listProduct.addAll(filteredList);
-        productAdapter.setProductsList(listProduct);
-    }
-
         private void sortByPriceDescending(List<Products> productList) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             productList.sort(Comparator.comparingDouble(Products::getPrice).reversed());
@@ -186,6 +153,21 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 }
             });
         }
+
+    }
+    private void filterProducts(String query) {
+        List<Products> filteredList = new ArrayList<>();
+
+        for (Products product : listAllProduct) {
+            if (product.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+
+        // Update the product list in the adapter
+        listProduct.clear();
+        listProduct.addAll(filteredList);
+        productAdapter.setProductsList(listProduct);
     }
     @Override
     public void onItemClick(Shop shop) {

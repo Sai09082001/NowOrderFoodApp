@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,17 +27,21 @@ public class Products implements Serializable {
     @JsonProperty("imageUrl")
     private String imageUrl;
 
+    @JsonProperty("productReviews")
+    private List<ProductReview> productReviews;
+
     public Products(){
 
     }
 
-    public Products(int id, String name, String description, double price, int quantity, String imageUrl) {
+    public Products(int id, String name, String description, double price, int quantity, String imageUrl, List<ProductReview> productReviewList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.imageUrl = imageUrl;
+        this.productReviews = productReviewList;
     }
 
     public int getId() {
@@ -70,6 +75,12 @@ public class Products implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+    public List<ProductReview> getProductReviews() {
+        return productReviews;
+    }
+    public void setProductReviews(List<ProductReview> productReviews) {
+        this.productReviews = productReviews;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -96,6 +107,7 @@ public class Products implements Serializable {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", productReviews=" + productReviews +
                 '}';
     }
 }

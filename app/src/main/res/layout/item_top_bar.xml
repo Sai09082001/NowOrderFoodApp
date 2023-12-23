@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="56dp">
+<layout   xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
 
-    <ImageView
-        android:layout_gravity="center|start"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TableRow
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_order_list"
-            android:textColor="@color/orange"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:text="Watch Shop"
+        <ImageView
+            android:layout_gravity="center|start"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <TableRow
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_order_list"
+                android:textColor="@color/orange"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="Watch Shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:src="@drawable/bg_splash_shoe"
+                android:layout_width="36dp"
+                android:layout_height="36dp"/>
+        </TableRow>
         <ImageView
-            android:src="@drawable/bg_splash_shoe"
+            android:id="@+id/iv_cart_user"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="end|center"
+            android:src="@drawable/ic_shopping_bag"
             android:layout_width="36dp"
             android:layout_height="36dp"/>
-    </TableRow>
-    <ImageView
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="end|center"
-        android:src="@drawable/ic_shopping_bag"
-        android:layout_width="36dp"
-        android:layout_height="36dp"/>
-</FrameLayout>
+    </FrameLayout>
+</layout>

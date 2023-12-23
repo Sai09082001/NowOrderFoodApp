@@ -9,6 +9,8 @@ public class App extends Application {
     private boolean isOrder;
     private User user;
 
+    private Storage storage;
+
     public User getUser() {
         return user;
     }
@@ -29,10 +31,14 @@ public class App extends Application {
         if(instance == null) instance = new App();
         return instance;
     }
+    public Storage getStorage(){
+        return storage;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        storage = new Storage();
         instance = this;
     }
 }

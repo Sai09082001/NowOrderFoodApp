@@ -59,6 +59,10 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
         shop = (Shop) getIntent().getSerializableExtra(ShopDetailActivity.SHOP_NAME) ;
         productsList = (List<Products>) getIntent().getSerializableExtra(ShopDetailActivity.LIST_PRODUCT);
         productMap = (HashMap<Integer, Integer>)getIntent().getSerializableExtra(ShopDetailActivity.DATA_ORDER_FRAGMENT);
+        binding.tvUserName.setText(App.getInstance().getUser().getName());
+        binding.tvUserPhone.setText(App.getInstance().getUser().getPhonenumber());
+        binding.tvShopName.setText(shop.getName());
+        binding.tvShopAddress.setText(shop.getAddress());
         for (Map.Entry<Integer, Integer> entry : getProductMap().entrySet()) {
             int productId = entry.getKey();
             int quantity = entry.getValue();
