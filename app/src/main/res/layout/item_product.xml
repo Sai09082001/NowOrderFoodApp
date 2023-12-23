@@ -6,6 +6,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_product"
             android:src="@drawable/ic_now_shop"
             android:layout_width="86dp"
             android:layout_height="86dp"/>

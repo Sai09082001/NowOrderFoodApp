@@ -11,7 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
+import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Shop;
@@ -50,7 +53,7 @@ public class ShopDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private TextView tvProductName;
         private TextView tvDescription;
         private TextView tvPrice;
-        private ImageView ivAddProduct;
+        private ImageView ivProduct, ivAddProduct;
         private Products products;
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +61,7 @@ public class ShopDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvDescription = itemView.findViewById(R.id.tv_description);
             tvPrice = itemView.findViewById(R.id.tv_price);
             ivAddProduct = itemView.findViewById(R.id.iv_add_product);
+            ivProduct = itemView.findViewById(R.id.iv_product);
             ivAddProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -116,6 +120,7 @@ public class ShopDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 productHolder.tvProductName.setText(dataProduct.getName());
                 productHolder.tvDescription.setText(dataProduct.getDescription());
                 productHolder.tvPrice.setText(dataProduct.getPrice()+"");
+                Glide.with(mContext).load(dataProduct.getImageUrl()).into(productHolder.ivProduct);
                 productHolder.products = dataProduct;
                 break;
         }
