@@ -1,5 +1,6 @@
 package com.example.noworderfoodapp.api;
 
+import com.example.noworderfoodapp.entity.Banner;
 import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.Orders;
 import com.example.noworderfoodapp.entity.Products;
@@ -7,9 +8,6 @@ import com.example.noworderfoodapp.entity.Promotion;
 import com.example.noworderfoodapp.entity.ResponseDTO;
 import com.example.noworderfoodapp.entity.Shop;
 import com.example.noworderfoodapp.entity.User;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.util.List;
 
@@ -49,6 +47,8 @@ public interface ApiService {
     Call<ResponseDTO<List<Category>>> getListCategory();
     @GET("/products/list")
     Call<ResponseDTO<List<Products>>> getListProducts();
+    @GET("/banner/list")
+    Call<ResponseDTO<List<Banner>>> getListBanner();
     @POST("/orders/updateuser")
     Call<ResponseDTO<Void>> orderUpdateUser(@Body Orders orders);
 
@@ -70,6 +70,9 @@ public interface ApiService {
     @POST("/promotion/edit")
     Call<ResponseDTO<Void>> updatePromotion(@Body Promotion promotion);
 
+    @POST("/products/edit")
+    Call<ResponseDTO<Void>> updateProducts(@Body Products products);
+
     @POST("/orders/update")
     Call<ResponseDTO<Void>> orderUpdate(@Body Orders orders);
 
@@ -87,4 +90,11 @@ public interface ApiService {
 
     @POST("/orders/customer")
     Call<ResponseDTO<Void>> postOrderData(@Body Orders orders);
+
+    @FormUrlEncoded
+    @POST("/user/change_password")
+    Call<ResponseDTO<Void>> changePassword(@Field("id") int id,
+                                           @Field("password") String password);
+
+
 }

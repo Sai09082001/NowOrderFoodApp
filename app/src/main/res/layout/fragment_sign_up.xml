@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:id="@+id/edt_create_password"
              android:layout_marginTop="16dp"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:hint="Mật khẩu" />
 
         <EditText
@@ -85,7 +85,6 @@
                 android:id="@+id/role_user"
                 android:text="USER"
                 android:layout_marginEnd="20dp"
-                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

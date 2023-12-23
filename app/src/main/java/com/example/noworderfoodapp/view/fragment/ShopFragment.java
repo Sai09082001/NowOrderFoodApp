@@ -3,8 +3,10 @@ package com.example.noworderfoodapp.view.fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -17,31 +19,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.CommonUtils;
-import com.example.noworderfoodapp.OnActionCallBack;
 import com.example.noworderfoodapp.R;
 import com.example.noworderfoodapp.database.SQLiteHelper;
 import com.example.noworderfoodapp.databinding.FragmentShopBinding;
 import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.FavoriteShop;
-import com.example.noworderfoodapp.entity.Orders;
 import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Shop;
+import com.example.noworderfoodapp.view.act.ProductDetailActivity;
 import com.example.noworderfoodapp.view.act.ShopDetailActivity;
+import com.example.noworderfoodapp.view.adapter.CategoryAdapter;
 import com.example.noworderfoodapp.view.adapter.ProductAdapter;
 import com.example.noworderfoodapp.view.adapter.ShopAdapter;
+import com.example.noworderfoodapp.view.dialog.FilterOptionDialog;
 import com.example.noworderfoodapp.viewmodel.ShopViewModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewModel> implements ShopAdapter.OnItemClick ,ProductAdapter.OnItemClick{
+public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewModel> implements ShopAdapter.OnItemClick, ProductAdapter.OnItemClick, CategoryAdapter.OnItemClick, FilterOptionDialog.OnItemClick {
     public static final String KEY_SHOW_SHOP_DETAIL = "KEY_SHOW_SHOP_DETAIL";
-    private ShopAdapter shopAdapter;
-    private List<Shop> listShop;
+    private CategoryAdapter categoryAdapter;
+    private List<Category> listCategory;
 
     private ProductAdapter productAdapter;
     private List<Products> listProduct;
+    private List<Products> listAllProduct;
     @Override
     protected Class<ShopViewModel> getViewModelClass() {
         return ShopViewModel.class;
@@ -54,17 +60,18 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
 
     @Override
     protected void initViews() {
-        listShop = new ArrayList<>();
+        listCategory = new ArrayList<>();
         listProduct = new ArrayList<>();
+        listAllProduct = new ArrayList<>();
         mViewModel.getListShopServer();
         mViewModel.getListProducts();
-        mViewModel.getShopMutableLiveData().observe(this, new Observer<List<Shop>>() {
+        mViewModel.getCategoryMutableLiveData().observe(this, new Observer<List<Category>>() {
             @Override
-            public void onChanged(List<Shop> shops) {
-                listShop.clear();
-                listShop.addAll(shops);
-                shopAdapter.notifyDataSetChanged();
-                Log.i("KMFG", "initViews: "+listShop.toString());
+            public void onChanged(List<Category> shops) {
+                listCategory.clear();
+                listCategory.addAll(shops);
+                categoryAdapter.notifyDataSetChanged();
+                Log.i("KMFG", "initViews: "+listCategory.toString());
             }
         });
         mViewModel.getProductsMutableLiveData().observe(this, new Observer<List<Products>>() {
@@ -72,23 +79,114 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
             public void onChanged(List<Products> products) {
                 listProduct.clear();
                 listProduct.addAll(products);
+                listAllProduct.addAll(products);
                 productAdapter.notifyDataSetChanged();
             }
         });
       //  setCallBack((OnActionCallBack) getActivity());
-        shopAdapter = new ShopAdapter(listShop,getContext());
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
-        binding.rcvShop.setLayoutManager(manager);
-        binding.rcvShop.setAdapter(shopAdapter);
-        shopAdapter.setOnItemClick(this);
+        categoryAdapter = new CategoryAdapter(listCategory,getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false);
+        binding.rcvCategory.setLayoutManager(manager);
+        binding.rcvCategory.setAdapter(categoryAdapter);
+        categoryAdapter.setOnItemClick(this);
 
         productAdapter = new ProductAdapter(listProduct,getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         binding.rcvWatchProduct.setLayoutManager(gridLayoutManager);
         binding.rcvWatchProduct.setAdapter(productAdapter);
         productAdapter.setOnItemClick(this);
+        binding.tvAllProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listProduct.clear();
+                listProduct.addAll(listAllProduct);
+                productAdapter.setProductsList(listProduct);
+            }
+        });
+        binding.tbFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterOptionDialog filterOptionDialog = new FilterOptionDialog();
+                filterOptionDialog.show(getActivity().getSupportFragmentManager(), FilterOptionDialog.TAG);
+                filterOptionDialog.setOnItemClick(ShopFragment.this);
+            }
+        });
+        binding.imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the search query from the EditText
+                String searchQuery = binding.edSearch.getText().toString();
+
+                // Filter products based on the search query
+                filterProducts(searchQuery);
+            }
+        });
+
+        binding.edSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Not used in this case
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Not used in this case
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Filter products based on the search query as the user types
+                filterProducts(editable.toString());
+            }
+        });
+
+
+
+
+
     }
 
+    private void filterProducts(String query) {
+        List<Products> filteredList = new ArrayList<>();
+
+        for (Products product : listAllProduct) {
+            if (product.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+
+        // Update the product list in the adapter
+        listProduct.clear();
+        listProduct.addAll(filteredList);
+        productAdapter.setProductsList(listProduct);
+    }
+
+        private void sortByPriceDescending(List<Products> productList) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            productList.sort(Comparator.comparingDouble(Products::getPrice).reversed());
+        } else {
+            // Sắp xếp trên Android dưới 7.0
+            Collections.sort(productList, new Comparator<Products>() {
+                @Override
+                public int compare(Products product1, Products product2) {
+                    return Double.compare(product2.getPrice(), product1.getPrice());
+                    // Đảo ngược giá trị để sắp xếp giảm dần
+                }
+            });
+        }
+    }
+    private void sortByPriceAscending(List<Products> productList) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(productList, Comparator.comparingDouble(Products::getPrice));
+        } else {
+            Collections.sort(productList, new Comparator<Products>() {
+                @Override
+                public int compare(Products product1, Products product2) {
+                    return Double.compare(product1.getPrice(), product2.getPrice());
+                }
+            });
+        }
+    }
     @Override
     public void onItemClick(Shop shop) {
         Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
@@ -132,17 +230,40 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
     public void onResume() {
         super.onResume();
       //
-        List<Shop> shopList = mViewModel.getShopMutableLiveData().getValue();
+        List<Category> shopList = mViewModel.getCategoryMutableLiveData().getValue();
         if (shopList != null) {
-            shopAdapter.setListShop(shopList);
+            categoryAdapter.setListCategories(shopList);
         }
-        shopAdapter.setListShop(listShop);
+        categoryAdapter.setListCategories(listCategory);
         binding.lnShopList.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onItemClick(Products products) {
-        Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
+        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+        intent.putExtra("product_detail",products);
         getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(Category category) {
+        listProduct.clear();
+        listProduct.addAll(category.getProducts());
+        productAdapter.setProductsList(listProduct);
+    }
+
+    @Override
+    public void onItemClick(String key) {
+        if (key.equals(FilterOptionDialog.KEY_REDUCE)) {
+            listProduct.clear();
+            sortByPriceDescending(listAllProduct);
+            listProduct.addAll(listAllProduct);
+            productAdapter.setProductsList(listProduct);
+        } else {
+            listProduct.clear();
+            sortByPriceAscending(listAllProduct);
+            listProduct.addAll(listAllProduct);
+            productAdapter.setProductsList(listProduct);
+        }
     }
 }

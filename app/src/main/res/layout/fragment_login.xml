@@ -63,7 +63,7 @@
             android:id="@+id/edt_password"
             android:layout_marginTop="50dp"
             android:drawableStart="@drawable/ic_lock"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:hint="Mật khẩu" />
 
         <TextView
