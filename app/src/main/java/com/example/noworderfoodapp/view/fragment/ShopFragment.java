@@ -211,7 +211,6 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
     @Override
     public void onResume() {
         super.onResume();
-      //
         List<Category> shopList = mViewModel.getCategoryMutableLiveData().getValue();
         if (shopList != null) {
             categoryAdapter.setListCategories(shopList);
