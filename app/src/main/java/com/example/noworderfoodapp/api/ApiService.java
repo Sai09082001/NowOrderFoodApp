@@ -90,4 +90,11 @@ public interface ApiService {
 
     @POST("/orders/customer")
     Call<ResponseDTO<Void>> postOrderData(@Body Orders orders);
+
+    @FormUrlEncoded
+    @POST("/user/change_password")
+    Call<ResponseDTO<Void>> changePassword(@Field("id") int id,
+                                           @Field("password") String password);
+
+
 }
