@@ -13,8 +13,10 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
+import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.databinding.ActivityProductDetailBinding;
 import com.example.noworderfoodapp.entity.Banner;
 import com.example.noworderfoodapp.entity.Category;
@@ -116,6 +118,7 @@ public class ProductDetailActivity extends BaseActivity<ActivityProductDetailBin
                 }
             }
         });
+        Glide.with(this).load(data.getImageUrl()).into(binding.ivProduct);
     }
 
 

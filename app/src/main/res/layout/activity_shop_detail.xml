@@ -18,6 +18,7 @@
             android:background="@drawable/custom_bg_cart">
 
             <ImageView
+                android:id="@+id/iv_cart_user"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center|start"

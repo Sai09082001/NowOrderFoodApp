@@ -25,6 +25,7 @@
         <activity android:name=".view.act.ShipOrderDoneActivity"/>
         <activity android:name=".view.act.OrderDetailActivity"/>
         <activity android:name=".view.act.CartActivity"/>
+        <activity android:name=".view.act.CartUserActivity"/>
         <activity android:name=".view.act.EditUserActivity"/>
         <activity android:name=".view.act.ProductDetailActivity"/>
         <activity

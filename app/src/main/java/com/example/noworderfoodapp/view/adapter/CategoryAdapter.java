@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
+import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.entity.Category;
 
 import java.util.List;
@@ -47,6 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
         Category data = listCategories.get(position); // lấy vị trí gán data tương ứng cho từng data
         holder.tvCategoryName.setText(data.getName());
+        Glide.with(mContext).load(data.getCategoryUrl()).into(holder.imageView);
         holder.category = data;
     }
 
@@ -66,11 +70,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public class CategoryHolder extends RecyclerView.ViewHolder {
         private TextView tvCategoryName;
+        private ImageView imageView;
         private Category category;
 
         public CategoryHolder(@NonNull View itemView) {
             super(itemView);
             tvCategoryName = itemView.findViewById(R.id.tv_category_header);
+            imageView = itemView.findViewById(R.id.iv_category);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

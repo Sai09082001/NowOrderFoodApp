@@ -24,6 +24,7 @@ import com.example.noworderfoodapp.entity.Category;
 import com.example.noworderfoodapp.entity.FavoriteShop;
 import com.example.noworderfoodapp.entity.Products;
 import com.example.noworderfoodapp.entity.Shop;
+import com.example.noworderfoodapp.view.act.CartUserActivity;
 import com.example.noworderfoodapp.view.act.ProductDetailActivity;
 import com.example.noworderfoodapp.view.act.ShopDetailActivity;
 import com.example.noworderfoodapp.view.adapter.CategoryAdapter;
@@ -81,6 +82,13 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 productAdapter.notifyDataSetChanged();
             }
         });
+        binding.topBarAction.ivCartUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CartUserActivity.class);
+                startActivity(intent);
+            }
+        });
       //  setCallBack((OnActionCallBack) getActivity());
         categoryAdapter = new CategoryAdapter(listCategory,getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false);
@@ -135,6 +143,7 @@ public class ShopFragment extends BaseFragment<FragmentShopBinding, ShopViewMode
                 }
             });
         }
+
     }
     @Override
     public void onItemClick(Shop shop) {

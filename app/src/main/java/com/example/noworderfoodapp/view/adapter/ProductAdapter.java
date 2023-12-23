@@ -54,6 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         Products data = productsList.get(position); // lấy vị trí gán data tương ứng cho từng data
         holder.tvProductName.setText(data.getName());
         holder.tvProductPrice.setText(data.getPrice()+"");
+        Glide.with(mContext).load(data.getImageUrl()).into(holder.ivWatchProduct);
         holder.products = data;
     }
 
@@ -74,12 +75,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     public class ProductHolder extends RecyclerView.ViewHolder {
         private TextView tvProductName;
         private TextView tvProductPrice;
+        private ImageView ivWatchProduct;
 
         private Products products;
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tv_product_name);
             tvProductPrice= itemView.findViewById(R.id.tv_product_price);
+            ivWatchProduct= itemView.findViewById(R.id.iv_watch_product);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

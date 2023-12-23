@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
+import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.entity.Banner;
 import com.example.noworderfoodapp.entity.Promotion;
 
@@ -49,6 +52,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
     public void onBindViewHolder(@NonNull BannerHolder holder, int position) {
         Banner data = listBanner.get(position); // lấy vị trí gán data tương ứng cho từng data
         holder.tvBannerName.setText(data.getName()); // lấy vị trí gán data tương ứng cho từng data
+        Glide.with(mContext).load(data.getAvatarUrl()).into(holder.ivBanner);
         holder.banner = data;
     }
 
@@ -68,10 +72,12 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
 
     public class BannerHolder extends RecyclerView.ViewHolder {
         private TextView tvBannerName;
+        private ImageView ivBanner;
         private Banner banner;
         public BannerHolder(@NonNull View itemView) {
             super(itemView);
             tvBannerName = itemView.findViewById(R.id.tv_name_banner);
+            ivBanner = itemView.findViewById(R.id.iv_banner);
             tvBannerName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

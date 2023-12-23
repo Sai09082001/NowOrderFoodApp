@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
-    <include layout="@layout/item_top_bar" />
+    <include
+        android:id="@+id/top_bar_action"
+        layout="@layout/item_top_bar" />
 
     <FrameLayout
         android:layout_marginTop="10dp"

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.noworderfoodapp.App;
+import com.example.noworderfoodapp.CartSession;
 import com.example.noworderfoodapp.R;
 import com.example.noworderfoodapp.databinding.ActivityShopDetailBinding;
 import com.example.noworderfoodapp.entity.Category;
@@ -93,6 +94,18 @@ public class ShopDetailActivity extends BaseActivity<ActivityShopDetailBinding, 
                 intent.putExtra(LIST_PRODUCT,productsList);
                 startActivity(intent);
                // callBack.callBack(KEY_SHOW_ORDER_FRAGMENT, productQuantityMap);
+            }
+        });
+        binding.ivCartUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShopDetailActivity.this,CartUserActivity.class);
+                intent.putExtra(SHOP_NAME,shop);
+                intent.putExtra(DATA_ORDER_FRAGMENT,productQuantityMap);
+                intent.putExtra(LIST_PRODUCT,productsList);
+                startActivity(intent);
+                App.getInstance().getStorage().getCartSessionList().add(new CartSession(shop,productQuantityMap,productsList));
+                finish();
             }
         });
     }
