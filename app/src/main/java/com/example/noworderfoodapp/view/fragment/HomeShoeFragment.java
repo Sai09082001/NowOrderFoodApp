@@ -52,6 +52,7 @@ public class HomeShoeFragment extends BaseFragment<FragmentHomeShoeBinding, Home
                 listBanner.clear();
                 listBanner.addAll(categories);
                 bannerAdapter.notifyDataSetChanged();
+
             }
         });
 

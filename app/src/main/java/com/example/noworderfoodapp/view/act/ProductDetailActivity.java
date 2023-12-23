@@ -63,6 +63,9 @@ public class ProductDetailActivity extends BaseActivity<ActivityProductDetailBin
         Products data = (Products) getIntent().getSerializableExtra("product_detail");
         binding.tvProductName.setText(data.getName());
         binding.tvProductPrice.setText(data.getPrice()+"Đ");
+        binding.tvProductOrigin.setText(data.getOrigin());
+        binding.tvProductMaterial.setText(data.getMaterial());
+        binding.tvProductDescription.setText(data.getDescription());
         if (!data.getProductReviews().isEmpty()) {
             binding.tvProductVote.setText(data.getProductReviews().get(0).getRating()+"");
             Log.i("KMFG", "initViews:fragment_order ");
