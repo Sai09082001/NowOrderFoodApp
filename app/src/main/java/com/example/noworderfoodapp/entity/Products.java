@@ -24,6 +24,28 @@ public class Products implements Serializable {
     @JsonProperty("quantity")
     private int quantity;
 
+    @JsonProperty("origin")
+    private String origin;
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    @JsonProperty("material")
+    private String material;
+
     @JsonProperty("imageUrl")
     private String imageUrl;
 
@@ -34,13 +56,15 @@ public class Products implements Serializable {
 
     }
 
-    public Products(int id, String name, String description, double price, int quantity, String imageUrl, List<ProductReview> productReviewList) {
+    public Products(int id, String name, String description, double price, int quantity, String origin, String material, String imageUrl, List<ProductReview> productReviewList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.imageUrl = imageUrl;
+        this.origin = origin;
+        this.material = material;
         this.productReviews = productReviewList;
     }
 
@@ -106,6 +130,8 @@ public class Products implements Serializable {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", origin='" + origin + '\'' +
+                ", material='" + material + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", productReviews=" + productReviews +
                 '}';

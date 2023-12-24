@@ -22,6 +22,8 @@ public class Shop implements Serializable {
 
     @JsonProperty("isBranch")
     private int isBranch; // 0 is branch, 1 is manager
+    @JsonProperty("star")
+    private double star;
     @JsonProperty("categories")
     private List<Category> categories;
 
@@ -29,7 +31,7 @@ public class Shop implements Serializable {
 
     }
 
-    public Shop(int id, String name, String address, String phone,int isBranch, List<Category> categories) {
+    public Shop(int id, String name, String address, String phone,int isBranch, double star,List<Category> categories) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -95,5 +97,13 @@ public class Shop implements Serializable {
 
     public void setIsBranch(int isBranch) {
         this.isBranch = isBranch;
+    }
+
+    public double getStar() {
+        return star;
+    }
+
+    public void setStar(double star) {
+        this.star = star;
     }
 }
