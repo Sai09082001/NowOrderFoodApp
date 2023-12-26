@@ -36,12 +36,22 @@ public class SignUpViewModel extends BaseViewModel {
     }
 
     public void upDataUser(User user){
+
+
         databaseReference = firebaseDatabase.getReference().child("users-reg").child(user.getId()+"");
+        databaseReference.child("name").setValue(user.getName());
+        databaseReference.child("age").setValue(user.getAge());
+        databaseReference.child("username").setValue(user.getUsername());
+        databaseReference.child("phonenumber").setValue(user.getPhonenumber());
+        databaseReference.child("homeAddress").setValue(user.getHomeAddress());
+        databaseReference.child("roles").setValue(user.getRoles());
+
+
         databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    App.getInstance().setUser(user);
+                 //   App.getInstance().setUser(user);
                 } else {
                     errorMessage.postValue(task.getException().toString());
                 }

@@ -29,6 +29,7 @@
         <activity android:name=".view.act.EditUserActivity"/>
         <activity android:name=".view.act.ProductDetailActivity"/>
         <activity android:name=".view.act.ChangePasswordActivity"/>
+        <activity android:name=".view.act.ChatActivity"/>
         <activity
             android:name=".view.act.MainActivity"
             android:theme="@style/Theme.NowOrderFoodApp"

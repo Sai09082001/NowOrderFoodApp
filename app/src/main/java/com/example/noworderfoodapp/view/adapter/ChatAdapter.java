@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
 import com.example.noworderfoodapp.entity.Message;
+import com.example.noworderfoodapp.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,7 +28,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public static final int TYPE_RIGHT = 1;
     private ArrayList<Message> messageArrayList;
     private String receiverUri;
-    FirebaseUser currentUser;
+    User currentUser;
     private Message clickedMess;
 
     public ChatAdapter(ArrayList<Message> messages, String receiverUri) {
@@ -99,8 +101,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (messageArrayList.get(position).getSenderUid().equals(currentUser.getUid())){
+        currentUser = App.getInstance().getUser();
+        if (messageArrayList.get(position).getSenderUid().equals(currentUser.getUsername())){
             return TYPE_RIGHT;
         } else {
             return TYPE_LEFT;

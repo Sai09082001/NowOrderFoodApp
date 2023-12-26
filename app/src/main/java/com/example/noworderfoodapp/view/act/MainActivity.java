@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 lgFragment.setCallBack(this);
                 showFragment(R.id.container_view, lgFragment, true);
                 break;
+
         }
     }
 }

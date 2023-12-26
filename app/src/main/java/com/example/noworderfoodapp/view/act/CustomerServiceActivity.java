@@ -1,13 +1,14 @@
 package com.example.noworderfoodapp.view.act;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
 import com.example.noworderfoodapp.databinding.ActivityCustomerServiceBinding;
 import com.example.noworderfoodapp.entity.User;
@@ -30,10 +31,16 @@ public class CustomerServiceActivity extends BaseActivity<ActivityCustomerServic
         return R.layout.activity_customer_service;
     }
 
+
     @Override
     protected void initViews() {
         listUser = new ArrayList<>();
-        viewModel.getListUserServer();
+        if (App.getInstance().getUser().getRoles().get(0).equals("ADMIN")) {
+            viewModel.getListUserServer();
+        } else {
+            viewModel.getListAdmin();
+        }
+
         viewModel.getUserMutableLiveData().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
@@ -66,17 +73,11 @@ public class CustomerServiceActivity extends BaseActivity<ActivityCustomerServic
 
     }
 
+
     @Override
     public void onItemClick(User user) {
-        String phoneNumber = user.getPhonenumber();
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-
-        intent.setData(Uri.parse("tel:" + phoneNumber));
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Không tìm thấy ứng dụng điện thoại.", Toast.LENGTH_SHORT).show();
-        }
+        Intent intent=new Intent(this,ChatActivity.class);
+        intent.putExtra("RECEIVER_USER", user);
+        startActivity(intent);
     }
 }

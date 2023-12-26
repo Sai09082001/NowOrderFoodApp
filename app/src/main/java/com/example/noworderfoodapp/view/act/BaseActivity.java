@@ -28,6 +28,7 @@ public abstract class BaseActivity<BD extends ViewDataBinding, VM extends ViewMo
         initViews();
     }
 
+
     protected abstract Class<VM> getViewModelClass();
 
     protected  abstract void initViews();

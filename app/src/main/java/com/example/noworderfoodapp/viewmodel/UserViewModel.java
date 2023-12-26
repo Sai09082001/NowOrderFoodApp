@@ -47,6 +47,38 @@ public class UserViewModel extends ViewModel {
                     List<User> listUser = apiResponse.getData();
                     // Xử lý dữ liệu User...
                     if (listUser != null) {
+                       // List<User> listData = listUser;
+                        userMutableLiveData.postValue(listUser);
+
+                    }
+                } else {
+                    // Xử lý khi có lỗi từ API
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDTO<List<User>>> call, Throwable t) {
+                // Xử lý khi gặp lỗi trong quá trình gọi API
+                Log.i("KMFG", "onFailure: "+t.getMessage());
+            }
+        });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void getListAdmin(){
+        Call<ResponseDTO<List<User>>> call = ApiService.apiService.
+                getListUser();
+        //   Call<ResponseDTO<List<User>>> call = ApiService.apiService.getListUser();
+        call.enqueue(new Callback<ResponseDTO<List<User>>>() {
+
+            @Override
+            public void onResponse(Call<ResponseDTO<List<User>>> call,
+                                   Response<ResponseDTO<List<User>>> response) {
+                if (response.isSuccessful()) {
+                    ResponseDTO<List<User>> apiResponse = response.body();
+                    List<User> listUser = apiResponse.getData();
+                    // Xử lý dữ liệu User...
+                    if (listUser != null) {
                         List<User> listData = filterWithUser(listUser);
                         userMutableLiveData.postValue(listData);
 
@@ -64,7 +96,6 @@ public class UserViewModel extends ViewModel {
             }
         });
     }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private List<User>  filterWithUser(List<User> listUser) {
         List<User> admins = listUser.stream()

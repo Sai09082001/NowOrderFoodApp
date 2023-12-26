@@ -54,8 +54,8 @@ public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.UserHo
         holder.tvUserAddress.setText(data.getHomeAddress());
         holder.tvUserPhone.setText(data.getPhonenumber());
         holder.user = data;
-        if ( App.getInstance().getUser().getAvatarUrl() == null){
-            holder.ivUser.setImageResource(R.drawable.ic_user_receiver);
+        if ( App.getInstance().getUser().getAvatarUrl() != null){
+            Glide.with(mContext).load(App.getInstance().getUser().getAvatarUrl()).into(holder.ivUser);
         } else {
             Glide.with(mContext).load(""+ApiClient.BASE_URL+"/user/download?filename="+
                     App.getInstance().getUser().getAvatarUrl()).into(holder.ivUser);

@@ -2,6 +2,7 @@ package com.example.noworderfoodapp.view.fragment;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.noworderfoodapp.api.ApiService;
 import com.example.noworderfoodapp.databinding.FragmentOrderBinding;
 import com.example.noworderfoodapp.databinding.FragmentProfileBinding;
 import com.example.noworderfoodapp.databinding.FragmentSplashBinding;
+import com.example.noworderfoodapp.entity.User;
 import com.example.noworderfoodapp.view.act.ChangePasswordActivity;
 import com.example.noworderfoodapp.view.act.CustomerServiceActivity;
 import com.example.noworderfoodapp.view.act.EditUserActivity;
@@ -37,12 +39,13 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
 
     @Override
     protected void initViews() {
-       binding.tvNameProfile.setText(App.getInstance().getUser().getUsername());
-       if ( App.getInstance().getUser().getAvatarUrl() == null){
+        User currentUser = App.getInstance().getUser();
+       binding.tvNameProfile.setText(currentUser.getUsername());
+       if ( currentUser.getAvatarUrl() == null){
            binding.profileImage.setImageResource(R.drawable.ic_user_receiver);
        } else {
            Glide.with(this).load(""+ApiClient.BASE_URL+"/user/download?filename="+
-                   App.getInstance().getUser().getAvatarUrl()).into(binding.profileImage);
+                   currentUser.getAvatarUrl()).into(binding.profileImage);
        }
        binding.frEditUser.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -70,6 +73,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CustomerServiceActivity.class);
+
+
                 startActivity(intent);
             }
         });

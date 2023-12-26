@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.entity.Message;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChatViewModel extends ViewModel {
-    protected final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     protected final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference reference;
     private String chatRoom;
@@ -80,7 +81,7 @@ public class ChatViewModel extends ViewModel {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Message mess = dataSnapshot.getValue(Message.class);
-                    if (mess.getReceiverUid().equals(firebaseAuth.getCurrentUser().getUid())){
+                    if (mess.getReceiverUid().equals(App.getInstance().getUser())){
                         dataSnapshot.child("seen").getRef().setValue(true);
                     }
                 }
