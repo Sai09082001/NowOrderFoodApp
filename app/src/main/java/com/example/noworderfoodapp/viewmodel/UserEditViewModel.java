@@ -24,10 +24,9 @@ public class UserEditViewModel extends ViewModel {
         isChangePassword = new MutableLiveData<>();
     }
 
-    public void editUserSession(String name,String phoneNumber,String homeAddress){
+    public void editUserSession(String name,int age,String phoneNumber,String homeAddress){
         Call<ResponseDTO<Void>> call = ApiService.apiService.
-                editUser(App.getInstance().getUser().getId(),
-                        App.getInstance().getUser().getAge(),name,phoneNumber,homeAddress);
+                editUser(App.getInstance().getUser().getId(),age,name,phoneNumber,homeAddress);
         //   Call<ResponseDTO<List<User>>> call = ApiService.apiService.getListUser();
         call.enqueue(new Callback<ResponseDTO<Void>>() {
             @Override
@@ -60,42 +59,9 @@ public class UserEditViewModel extends ViewModel {
     }
 
 
-
-
-
-
-
     public void setIsLogin(boolean isEdit) {
         this.isEdit.setValue(isEdit);
     }
-
-    public void editUserSession() {
-        Call<ResponseDTO<User>> call = ApiService.apiService.getUserById(App.getInstance().getUser().getId());
-        call.enqueue(new Callback<ResponseDTO<User>>() {
-            @Override
-            public void onResponse(Call<ResponseDTO<User>> call, Response<ResponseDTO<User>> response) {
-                if (response.isSuccessful()) {
-                    ResponseDTO<User> apiResponse = response.body();
-                    User user = apiResponse.getData();
-                    if (user != null) {
-                        App.getInstance().setUser(user);
-                        // Xử lý dữ liệu userDTO
-                    } else {
-                        // Xử lý phản hồi không thành công
-                    }
-                } else {
-                    // Xử lý phản hồi không thành công
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseDTO<User>> call, Throwable t) {
-                // Xử lý lỗi
-            }
-        });
-    }
-
-
 
 
     //Change Password

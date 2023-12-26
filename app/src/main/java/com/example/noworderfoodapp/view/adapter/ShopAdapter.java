@@ -51,6 +51,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopHolder> {
         holder.tvShopName.setText(data.getName());
         holder.tvAddress.setText(data.getAddress());
         holder.tvPhone.setText(data.getPhone());
+        holder.tvShopStar.setText(data.getStar()+"");
         holder.shop = data;
 
     }
@@ -72,6 +73,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopHolder> {
 
     public class ShopHolder extends RecyclerView.ViewHolder {
         private TextView tvShopName;
+        private TextView tvShopStar;
         private TextView tvAddress;
         private TextView tvPhone;
         private ImageView ivFavoriteShop;
@@ -80,6 +82,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopHolder> {
             super(itemView);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
             tvAddress= itemView.findViewById(R.id.tv_address_shop);
+            tvShopStar= itemView.findViewById(R.id.tv_star_shop);
             tvPhone= itemView.findViewById(R.id.tv_phone_shop);
             ivFavoriteShop= itemView.findViewById(R.id.iv_favorite_shop);
             ivFavoriteShop.setOnClickListener(new View.OnClickListener() {

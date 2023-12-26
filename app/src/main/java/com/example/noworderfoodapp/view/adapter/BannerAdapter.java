@@ -7,21 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
-import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.entity.Banner;
-import com.example.noworderfoodapp.entity.Promotion;
 
 import java.util.List;
-
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHolder> {
     private List<Banner> listBanner;
     private final Context mContext;
@@ -110,4 +105,3 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
         }
     }
 }
-

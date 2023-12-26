@@ -38,7 +38,6 @@ public class ChangePasswordActivity extends BaseActivity<ActivityChangePasswordB
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean) {
-                    viewModel.editUserSession();
                     finish();
                 }
             }

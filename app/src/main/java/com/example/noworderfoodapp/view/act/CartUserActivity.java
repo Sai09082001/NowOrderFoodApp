@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class CartUserActivity extends BaseActivity<ActivityCartUserBinding, CartViewModel> implements CartUserAdapter.OnItemClick {
-    public static final int REQUEST_ACTION_PROMOTION = 111;
-    private ArrayList<OrderItems> orderItems;
+
     private CartUserAdapter cartUserAdapter;
 
     private String moneyCart;
@@ -37,7 +36,6 @@ public class CartUserActivity extends BaseActivity<ActivityCartUserBinding, Cart
 
     @Override
     protected void initViews() {
-        orderItems = new ArrayList<>();
         cartUserAdapter = new CartUserAdapter(App.getInstance().getStorage().getCartSessionList(),this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.rcvCartUser.setLayoutManager(linearLayoutManager);

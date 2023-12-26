@@ -18,18 +18,33 @@ public class Products implements Serializable {
     @JsonProperty("description")
     private String description;
 
-
-    @JsonProperty("origin")
-    private String origin;
-
-    @JsonProperty("material")
-    private String material;
-
     @JsonProperty("price")
     private double price;
 
     @JsonProperty("quantity")
     private int quantity;
+
+    @JsonProperty("origin")
+    private String origin;
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    @JsonProperty("material")
+    private String material;
 
     @JsonProperty("imageUrl")
     private String imageUrl;
@@ -37,17 +52,19 @@ public class Products implements Serializable {
     @JsonProperty("productReviews")
     private List<ProductReview> productReviews;
 
+    public Products(){
 
+    }
 
-    public Products(int id, String name, String description, String origin, String material, double price, int quantity, String imageUrl, List<ProductReview> productReviewList) {
+    public Products(int id, String name, String description, double price, int quantity, String origin, String material, String imageUrl, List<ProductReview> productReviewList) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.origin = origin;
-        this.material = material;
         this.price = price;
         this.quantity = quantity;
         this.imageUrl = imageUrl;
+        this.origin = origin;
+        this.material = material;
         this.productReviews = productReviewList;
     }
 
@@ -69,12 +86,6 @@ public class Products implements Serializable {
 
     public String getDescription() {
         return description;
-    }
-    public String getOrigin() {
-        return origin;
-    }
-    public String getMaterial() {
-        return material;
     }
 
     public void setDescription(String description) {
@@ -119,6 +130,8 @@ public class Products implements Serializable {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", origin='" + origin + '\'' +
+                ", material='" + material + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", productReviews=" + productReviews +
                 '}';

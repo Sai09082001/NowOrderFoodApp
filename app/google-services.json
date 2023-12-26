@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "65483604208",
+    "project_id": "watchapp-e5a14",
+    "storage_bucket": "watchapp-e5a14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65483604208:android:f17635131863c8896d8235",
+        "android_client_info": {
+          "package_name": "com.example.noworderfoodapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_uHXHOSp0NT__7SU63PA--JbZDbfv6H8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

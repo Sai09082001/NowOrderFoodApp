@@ -3,6 +3,8 @@ package com.example.noworderfoodapp;
 import android.app.Application;
 
 import com.example.noworderfoodapp.entity.User;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 
 public class App extends Application {
     private static App instance;
