@@ -44,7 +44,7 @@ public class EditUserActivity extends BaseActivity<ActivityEditUserBinding, User
        binding.tvEdit.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               viewModel.editUserSession(binding.tvName.getText().toString(),binding.tvUserPhone.getText().toString()
+               viewModel.editUserSession(binding.tvName.getText().toString(),Integer.parseInt(binding.tvUserAge.getText().toString()),binding.tvUserPhone.getText().toString()
                ,binding.tvUserHome.getText().toString());
            }
        });
@@ -52,7 +52,6 @@ public class EditUserActivity extends BaseActivity<ActivityEditUserBinding, User
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean) {
-                    viewModel.editUserSession();
                     finish();
                 }
             }

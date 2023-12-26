@@ -1,29 +1,30 @@
 package com.example.noworderfoodapp.view.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.noworderfoodapp.App;
 import com.example.noworderfoodapp.R;
-import com.example.noworderfoodapp.api.ApiClient;
 import com.example.noworderfoodapp.entity.Banner;
-import com.example.noworderfoodapp.entity.Promotion;
 
 import java.util.List;
-
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHolder> {
     private List<Banner> listBanner;
     private final Context mContext;
     private OnItemClick callBack;
+
+    private Handler handler;
+    private int currentPosition;
+
 
     public void setListBanner(List<Banner> listPromotion) {
         this.listBanner = listPromotion;
@@ -37,6 +38,9 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
     public BannerAdapter(List<Banner> listPromotion, Context context) {
         this.listBanner = listPromotion;
         this.mContext = context;
+        handler = new Handler(Looper.getMainLooper());
+        currentPosition = 0;
+        startBannerChange();
     }
 
     @NonNull
@@ -48,9 +52,22 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
         return new BannerHolder(v);
     }
 
+    private void startBannerChange() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (listBanner != null && listBanner.size() > 1) {
+                    currentPosition = (currentPosition + 1) % listBanner.size();
+                    notifyDataSetChanged();
+                    handler.postDelayed(this, 5000); // Change banner every 5 seconds
+                }
+            }
+        }, 5000); // Initial delay before the first banner change
+    }
+
     @Override
     public void onBindViewHolder(@NonNull BannerHolder holder, int position) {
-        Banner data = listBanner.get(position); // lấy vị trí gán data tương ứng cho từng data
+        Banner data = listBanner.get(currentPosition); // lấy vị trí gán data tương ứng cho từng data
         holder.tvBannerName.setText(data.getName()); // lấy vị trí gán data tương ứng cho từng data
         Glide.with(mContext).load(data.getAvatarUrl()).into(holder.ivBanner);
         holder.banner = data;
@@ -88,4 +105,3 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerHold
         }
     }
 }
-
